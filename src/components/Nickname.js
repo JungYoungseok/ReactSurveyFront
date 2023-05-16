@@ -55,7 +55,7 @@ class Nickname extends Component{
             <h2>4.닉네임</h2>
             </legend>
             
-            <form target="self" action="Submit_done.html" onSubmit={this.submit}>
+            <form target="_self" action="Submit_done.html" onSubmit={this.submit}>
                 <input name="nickname_box" defaultValue={_rand_name} onChange={this.handleChange} /> 
                 <button type="submit" >설문 제출</button>                        
             </form>
