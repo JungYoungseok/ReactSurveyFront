@@ -20,7 +20,7 @@ function Home() {
 
   const handleSubmit = event => {
     //event.preventDefault();
-    navigate('/vote_done');
+    navigate('/vote_done.html');
   };
 
   return (  
@@ -36,7 +36,7 @@ function Vote_done() {
 
   const handleClick = event => {
     //event.preventDefault();
-    navigate('/');
+    navigate('/index.html');
   };
 
   return (
@@ -186,8 +186,8 @@ class App extends Component {
         <Nickname nickname={_nickname}> </Nickname>
 
         <Routes>
-          <Route path="/vote_done" element={<Vote_done />} />
-          <Route path="/" element={<Home />} />
+          <Route path="/vote_done.html" element={<Vote_done />} />
+          <Route path="/index.html" element={<Home />} />
         </Routes>
       </div>
     )
