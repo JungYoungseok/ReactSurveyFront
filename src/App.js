@@ -39,13 +39,13 @@ function Submit_done() {
   };
 
   return (
-    <h1 onClick={handleClick}>Thank you!</h1>
-    // <html>
-    //   <title>2023 Q2 Datadog RUM Webinar</title>
-    //   <body>
-        
-    //   </body>
-    // </html>
+
+    <html>
+      <title>2023 Q2 Datadog RUM Webinar</title>
+      <body>
+          <h1 onClick={handleClick}>Thank you!</h1>        
+      </body>
+    </html>
   )
 }
 
@@ -139,8 +139,6 @@ class App extends Component {
     var _title, _desc = null;
     var _datadog_user = this.state.datadog_user;
     var _job = this.state.job;
-    //var _nickname = names.random();
-
 
 
     console.log('render', this);
