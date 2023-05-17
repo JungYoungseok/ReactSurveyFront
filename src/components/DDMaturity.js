@@ -48,7 +48,7 @@ class DDMaturity extends Component {
             checked={this.state.datadog_user === "1"}
             onChange={this.handleDatadogUserChange}
             onClick={function(e){
-                this.props.onChangePage(e.target.value);
+                this.props.onChangePage(e.target.value);                
               }.bind(this)}                
           />
           RUM은 사용해본적 없지만 다른 제품은 사용중이에요

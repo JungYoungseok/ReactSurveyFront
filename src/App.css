@@ -1,8 +1,9 @@
 body {
-  background-color: #f1e3dc;
+  background-color: #fffbf9;
   color: rgb(40, 13, 13);
   padding: 20px;
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  /* font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; */
+  font-family: sans-serif;
   text-align: left;  
 }
 
