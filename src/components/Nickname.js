@@ -7,22 +7,38 @@ import { datadogRum } from '@datadog/browser-rum';
 
 function postData(url, body) {
   var http = new XMLHttpRequest;
+  http.responseType = 'json';
   http.open("POST", url, true);
   http.setRequestHeader('Content-Type', 'application/json');
   //http.withCredentials = 'true';
-  http.onreadystatechange = function() {
-      if(http.readyState == 4) {
-        console.log("here1");
-          console.log("response 4: ");
-          var parsedJSONresponse = JSON.parse(http.responseText);
-          console.log(parsedJSONresponse);
-          console.log(parsedJSONresponse["nickname"] + ", " + parsedJSONresponse["job"]);
-          alert(parsedJSONresponse["nickname"] + "님, " + parsedJSONresponse["job"]);
-      } else {
-          console.log("here2");
-          console.log("state " + http.readyState);
-      }
-  }
+  http.onload = function(e) {
+    if (this.status == 200) {
+      var result = this.response
+      console.log('response', result); // JSON response  
+      var parsedJSONresult = JSON.parse(result);
+      console.log("nickname: " + parsedJSONresult["nickname"]);
+    } else {
+      console.log("here2");
+      console.log("state " + http.readyState);
+    }
+  };
+  // http.onreadystatechange = function() {
+  //     if(http.readyState == 4) {
+  //       console.log("here1");
+  //         console.log("response 4: ");
+  //         var result = http.responseText;
+  //         console.log(result);
+  //         var parsedJSONresult = JSON.parse(result);
+  //         console.log(result);
+
+  //         console.log(result);
+  //         console.log(parsedJSONresponse["nickname"] + ", " + parsedJSONresponse["job"]);
+  //         alert(parsedJSONresponse["nickname"] + "님, " + parsedJSONresponse["job"]);
+  //     } else {
+  //         console.log("here2");
+  //         console.log("state " + http.readyState);
+  //     }
+  // }
   http.send(body);
 }
 
