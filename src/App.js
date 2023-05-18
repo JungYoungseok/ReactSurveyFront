@@ -39,12 +39,9 @@ function Submit_done() {
 
   return (
 
-    <html>
-      <title>2023 Q2 Datadog RUM Webinar</title>
-      <body>
+    
           <h1 onClick={handleClick}>Thank you!</h1>        
-      </body>
-    </html>
+    
   )
 }
 

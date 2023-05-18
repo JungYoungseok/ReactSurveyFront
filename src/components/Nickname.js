@@ -3,6 +3,28 @@ import names from  'random-names-generator';
 import { datadogRum } from '@datadog/browser-rum';
 
 
+
+async function postData(url = "", data = {}) {
+    // Default options are marked with *
+    const response = await fetch(url, {
+      method: "POST", // *GET, POST, PUT, DELETE, etc.
+      mode: "cors", // no-cors, *cors, same-origin
+      cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+      credentials: "same-origin", // include, *same-origin, omit
+      headers: {
+        "Content-Type": "application/json",
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      redirect: "follow", // manual, *follow, error
+      referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+      body: JSON.stringify(data), // body data type must match "Content-Type" header
+    });
+
+    var resText = response.json();
+    console.log(resText);
+    return resText; // parses JSON response into native JavaScript objects
+  }
+
 class Nickname extends Component{
 
     constructor() {
@@ -14,12 +36,36 @@ class Nickname extends Component{
         this.handleChange = this.handleChange.bind(this);
       }
 
+    
+
     submit(){
         let url = "https://0igxiahppc.execute-api.ap-northeast-2.amazonaws.com/v2/addSurvey";
-        //let data = this.state.survey_data;
-        var data = '{\"nickname\" : "' + this.state.survey_data.nickname 
-                    + '\", "job" : \"' + this.state.survey_data.job 
-                    + '\", "datadog_user\" : "' + this.state.survey_data.datadog_user + '"}';
+        let data = this.state.survey_data;
+        console.log("submit!!!")
+
+
+        fetch('https://0igxiahppc.execute-api.ap-northeast-2.amazonaws.com/v2/addSurvey', {
+            method: 'POST',
+            body: JSON.stringify({
+              nickname: this.state.nickname,
+              job: this.state.job,
+              datadog_user: this.state.datadog_user
+            }),
+            headers: {
+              'Content-type': 'application/json; charset=UTF-8',
+              'dataType': 'json'
+            }
+          })
+          .then(res => res.json())
+          .then(console.log)
+          .then(console.context())        
+        // postData(url, data).then((res) => {
+        //     console.log('This is res: ' + res); // JSON data parsed by `data.json()` call
+        // });
+
+        // var data = '{\"nickname\" : "' + this.state.survey_data.nickname 
+        //             + '\", "job" : \"' + this.state.survey_data.job 
+        //             + '\", "datadog_user\" : "' + this.state.survey_data.datadog_user + '"}';
 
         
         // var xhr = new XMLHttpRequest();
@@ -35,20 +81,20 @@ class Nickname extends Component{
         // xhr.send(JSON.stringify(data));        
 
 
-        fetch(url,{
-            method:'POST',
-            headers: {
-                "Content-type": "application/json; charset=UTF-8",
-                'Accept': 'application/json'
-            },
+        // fetch(url,{
+        //     method:'POST',
+        //     headers: {
+        //         "Content-type": "application/json; charset=UTF-8",
+        //         'Accept': 'application/json'
+        //     },
             
-            body:JSON.stringify(data)
+        //     body:JSON.stringify(data)
             
-        }).then((result)=>{
-            result.json().then((res)=>{
-                //console.warn('res',res)
-            })
-        })      
+        // }).then((result)=>{
+        //     result.json().then((res)=>{
+        //         //console.warn('res',res)
+        //     })
+        // })      
 
         console.log(this.state.survey_data.nickname + " "+ this.state.survey_data.job + " " + this.state.survey_data.datadog_user);
         datadogRum.setUser({
@@ -84,7 +130,7 @@ class Nickname extends Component{
             </legend>
             
             <form target="_self" action="Submit_done.html" onSubmit={this.submit}>
-                <input name="nickname_box" defaultValue={_rand_name} onChange={this.handleChange} /> 
+                <input name="nickname_box" onChange={this.handleChange} /> 
                 <button type="submit" >설문 제출</button>                        
             </form>
         </fieldset>
