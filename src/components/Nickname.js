@@ -34,9 +34,9 @@ class Nickname extends Component{
 
         console.log(nickname+" "+data.job + datadog_user);
         datadogRum.setUser({
-            job: data.job,
-            name: data.nickname,
-            datadog_user: data.datadog_user,
+            job: this.state.survey_data.job,
+            name: this.state.survey_data.nickname,
+            datadog_user: this.state.survey_data.datadog_user,
             coupon_prize: "yes",            
         })
     }
