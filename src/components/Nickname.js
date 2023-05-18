@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import names from  'random-names-generator';
+import { datadogRum } from '@datadog/browser-rum';
 
 
 class Nickname extends Component{
@@ -20,15 +21,23 @@ class Nickname extends Component{
         fetch(url,{
             method:'POST',
             headers: {
-                "Content-type": "application/json; charset=UTF-8"
+                "Content-type": "application/json; charset=UTF-8",
+                dataType: 'json'
             },
             body:JSON.stringify(data)
         }).then((result)=>{
             result.json().then((res)=>{
+                debugger
                 console.warn('res',res)
             })
         })      
-        
+
+        datadogRum.setUser({
+            job: data.job,
+            name: data.nickname,
+            datadog_user: data.datadog_user,
+            coupon_prize: yes
+        })
     }
     
     // handleChange(event){
