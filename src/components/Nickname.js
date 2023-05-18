@@ -29,7 +29,7 @@ class Nickname extends Component{
             // }
         };
         
-        xhr.send(data);        
+        xhr.send(JSON.stringify(data));        
 
 
         // fetch(url,{
