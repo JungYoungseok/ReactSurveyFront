@@ -19,6 +19,7 @@ datadogRum.init({
     trackUserInteractions: true,
     trackResources: true,
     trackLongTasks: true,
+    trackFrustrations: true,
     defaultPrivacyLevel:'mask-user-input'
 });
     

@@ -22,10 +22,10 @@ function Home() {
   };
 
   return (  
-    <form onSubmit={handleSubmit}>
+    // <form onSubmit={handleSubmit}>
       <p></p>
-      <button type="submit">다른 페이지로 전환(Routing) 테스트</button>
-    </form>
+    //   <button type="submit">다른 페이지로 전환(Routing) 테스트</button>
+    // </form>
   );
 }
 
@@ -40,7 +40,7 @@ function Submit_done() {
   return (
 
     
-          <h1 onClick={handleClick}>Thank you!</h1>        
+      <h1 onClick={handleClick}>Thank you!</h1>        
     
   )
 }
@@ -80,6 +80,7 @@ class App extends Component {
     // this.handleJobChange = this.handleJobChange.bind(this);
     //this.handleDatadogUserChange = this.handleDatadogUserChange.bind(this);
     this.submit = this.submit.bind(this);
+    this.error = this.error.bind(this);
     
   }
 
@@ -109,6 +110,10 @@ class App extends Component {
   //       [name]: value
   //   });    
   //}
+
+  error(){
+    var data = this.stateee.click();
+  }
 
   submit(){
       let url = "https://jsonplaceholder.typicode.com/posts";
@@ -161,6 +166,11 @@ class App extends Component {
         <Content job={_job} datadog_user={_datadog_user}></Content>
 
         <Nickname job={_job} datadog_user={_datadog_user}> </Nickname>
+        
+        <button type="submit">아무동작 안하는 버튼</button>
+        <button type="submit" onClick={this.error}>에러 만드는 버튼</button>
+   
+
 
         <Routes>
           <Route path="/submit_done.html" element={<Submit_done />} />

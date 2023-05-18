@@ -128,21 +128,34 @@ class Nickname extends Component{
         // })      
 
         var rand_num = Math.floor(Math.random() * 2);
+        var coupon_prize = "";
+
         if (rand_num === 1) {            
-          alert(this.state.survey_data.nickname + "님, 당첨되었습니다. 안라정님에게 DM으로 연락처를 알려주세요.")          
+          coupon_prize = "yes";
+          alert(this.state.survey_data.nickname + "님, 당첨되었습니다. 안라정님에게 DM으로 연락처를 알려주세요.")
+          
         } else {
+          coupon_prize = "no";
           alert(this.state.survey_data.nickname + "님, 아쉽게 되었네요.")
         }
+
+        datadogRum.setUser({
+          job: this.state.survey_data.job,
+          name: this.state.survey_data.nickname,
+          datadog_user: this.state.survey_data.datadog_user,
+          coupon_prize: coupon_prize,            
+      })
+
+      if (coupon_prize === "yes") {            
+        alert(this.state.survey_data.nickname + "님, 축하합니다. 안라정님에게 DM으로 연락처를 알려주세요.")
+      } else {
+        alert(this.state.survey_data.nickname + "님, 아쉽게 되었네요.")
+      }
+
 
 
 
         console.log("request sent! " + this.state.survey_data.nickname + " "+ this.state.survey_data.job + " " + this.state.survey_data.datadog_user);
-        datadogRum.setUser({
-            job: this.state.survey_data.job,
-            name: this.state.survey_data.nickname,
-            datadog_user: this.state.survey_data.datadog_user,
-            coupon_prize: "yes",            
-        })
     }
     
     // handleChange(event){
