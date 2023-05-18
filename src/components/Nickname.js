@@ -15,6 +15,7 @@ function postData(url, body) {
         console.log("here1");
           console.log("response 4: ");
           var parsedJSONresponse = JSON.parse(http.responseText);
+          console.log(parsedJSONresponse);
           console.log(parsedJSONresponse["nickname"] + ", " + parsedJSONresponse["job"]);
           alert(parsedJSONresponse["nickname"] + "님, " + parsedJSONresponse["job"]);
       } else {
