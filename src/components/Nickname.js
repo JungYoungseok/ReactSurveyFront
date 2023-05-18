@@ -8,7 +8,7 @@ class Nickname extends Component{
     constructor() {
         super();
         this.state = {
-            survey_data:{"nickname":"noname", "job":"b", "datadog_user":"0"},  
+            survey_data:{nickname:"noname", job:"b", datadog_user:"0"},  
         };
         this.submit = this.submit.bind(this);
         this.handleChange = this.handleChange.bind(this);
@@ -17,7 +17,21 @@ class Nickname extends Component{
     submit(){
         let url = "https://0igxiahppc.execute-api.ap-northeast-2.amazonaws.com/v2/addSurvey";
         let data = this.state.survey_data;
-      
+
+        
+        // var xhr = new XMLHttpRequest();
+        // xhr.open("POST", url, true);
+        // xhr.setRequestHeader("Content-Type", "application/json");
+        // xhr.onreadystatechange = function () {
+        //     if (xhr.readyState === 4 && xhr.status === 200) {
+        //         var json = JSON.parse(xhr.responseText);
+        //         console.log(json.email + ", " + json.password);
+        //     }
+        // };
+        
+        //xhr.send(data);        
+
+
         fetch(url,{
             method:'POST',
             headers: {
@@ -27,7 +41,7 @@ class Nickname extends Component{
             body:JSON.stringify(data)
         }).then((result)=>{
             result.json().then((res)=>{
-                console.warn('res',res)
+                //console.warn('res',res)
             })
         })      
 
