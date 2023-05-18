@@ -2,43 +2,22 @@ import React, { Component } from 'react';
 import names from  'random-names-generator';
 import { datadogRum } from '@datadog/browser-rum';
 
-
-
-
 function postData(url, body) {
   var http = new XMLHttpRequest;
   http.responseType = 'json';
   http.open("POST", url, true);
   http.setRequestHeader('Content-Type', 'application/json');
   //http.withCredentials = 'true';
-  http.onload = function(e) {
-    if (this.status == 200) {
-      var result = this.response
-      console.log('response', result); // JSON response  
-      var parsedJSONresult = JSON.parse(result);
-      console.log("nickname: " + parsedJSONresult["nickname"]);
-    } else {
-      console.log("here2");
-      console.log("state " + http.readyState);
-    }
-  };
-  // http.onreadystatechange = function() {
-  //     if(http.readyState == 4) {
-  //       console.log("here1");
-  //         console.log("response 4: ");
-  //         var result = http.responseText;
-  //         console.log(result);
-  //         var parsedJSONresult = JSON.parse(result);
-  //         console.log(result);
 
-  //         console.log(result);
-  //         console.log(parsedJSONresponse["nickname"] + ", " + parsedJSONresponse["job"]);
-  //         alert(parsedJSONresponse["nickname"] + "님, " + parsedJSONresponse["job"]);
-  //     } else {
-  //         console.log("here2");
-  //         console.log("state " + http.readyState);
-  //     }
-  // }
+  http.onreadystatechange = function() {
+      if(http.readyState == 4) {
+        console.log("here1");
+          console.log("response 4: " + http.responseText);
+      } else {
+          console.log("here2");
+          console.log("state " + http.readyState);
+      }
+  }
   http.send(body);
 }
 
@@ -70,7 +49,9 @@ class Nickname extends Component{
     constructor() {
         super();
         this.state = {
-            survey_data:{nickname:"noname", job:"b", datadog_user:"0"},  
+            survey_data:{nickname:"noname", job:"b", datadog_user:"0"},
+            lucky_draw_comment:"",
+            show: true,
         };
         this.submit = this.submit.bind(this);
         this.handleChange = this.handleChange.bind(this);
@@ -146,6 +127,15 @@ class Nickname extends Component{
         //     })
         // })      
 
+        var rand_num = Math.floor(Math.random() * 2);
+        if (rand_num === 1) {            
+          alert(this.state.survey_data.nickname + "님, 당첨되었습니다. 안라정님에게 DM으로 연락처를 알려주세요.")          
+        } else {
+          alert(this.state.survey_data.nickname + "님, 아쉽게 되었네요.")
+        }
+
+
+
         console.log("request sent! " + this.state.survey_data.nickname + " "+ this.state.survey_data.job + " " + this.state.survey_data.datadog_user);
         datadogRum.setUser({
             job: this.state.survey_data.job,
@@ -166,6 +156,9 @@ class Nickname extends Component{
 
         this.state.survey_data.nickname=e.target.value;
       };
+
+    toggle = () => this.setState((currentState) => ({show: !currentState.show}));
+
       
     render(){      
       console.log('Nickname render');
@@ -174,17 +167,25 @@ class Nickname extends Component{
       var _rand_name = ""; //names.random();
     
       return (
+        <div>
         <fieldset>
             <legend>
             <h2>4.닉네임</h2>
             </legend>
             
-            <form target="_self" action="Submit_done.html" onSubmit={this.submit}>
+            {/* <form target="_self" action="Submit_done.html" onSubmit={this.submit}> */}
+            <form onSubmit={this.submit}>
                 <input name="nickname_box" onChange={this.handleChange} /> 
                 <button type="submit" >설문 제출</button>                        
-            </form>
+            </form>            
         </fieldset>
-            
+        
+        {/* <button onClick={this.toggle}>
+          toggle: {this.state.show ? 'show' : 'hide'}
+        </button>    
+        {this.state.show && <div></div>}
+ */}
+        </div>
       );
 
       }
