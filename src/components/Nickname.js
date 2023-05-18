@@ -8,7 +8,7 @@ class Nickname extends Component{
     constructor() {
         super();
         this.state = {
-            survey_data:{nickname:"a", job:"b", datadog_user:"0"},  
+            survey_data:{"nickname":"noname", "job":"b", "datadog_user":"0"},  
         };
         this.submit = this.submit.bind(this);
         this.handleChange = this.handleChange.bind(this);
