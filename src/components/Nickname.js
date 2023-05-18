@@ -17,7 +17,7 @@ class Nickname extends Component{
     submit(){
         let url = "https://0igxiahppc.execute-api.ap-northeast-2.amazonaws.com/v2/addSurvey";
         //let data = this.state.survey_data;
-        let data = '{"nickname" : "' + this.state.survey_data.nickname 
+        var data = '{"nickname" : "' + this.state.survey_data.nickname 
                     + '", "job" : "' + this.state.survey_data.job 
                     + '", "datadog_user" : "' + this.state.survey_data.datadog_user + '"}';
 
@@ -41,7 +41,8 @@ class Nickname extends Component{
                 "Content-type": "application/json; charset=UTF-8",
                 dataType: 'json'
             },
-            body:JSON.stringify(data)
+            //body:JSON.stringify(data)
+            body:data
         }).then((result)=>{
             result.json().then((res)=>{
                 //console.warn('res',res)
