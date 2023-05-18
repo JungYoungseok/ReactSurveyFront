@@ -39,10 +39,11 @@ class Nickname extends Component{
             method:'POST',
             headers: {
                 "Content-type": "application/json; charset=UTF-8",
-                dataType: 'json'
+                'Accept': 'application/json'
             },
-            //body:JSON.stringify(data)
-            body:data
+            
+            body:JSON.stringify(data)
+            
         }).then((result)=>{
             result.json().then((res)=>{
                 //console.warn('res',res)
