@@ -47,9 +47,9 @@ class Nickname extends Component{
         fetch('https://0igxiahppc.execute-api.ap-northeast-2.amazonaws.com/v2/addSurvey', {
             method: 'POST',
             body: JSON.stringify({
-              nickname: this.state.nickname,
-              job: this.state.job,
-              datadog_user: this.state.datadog_user
+              nickname: this.state.survey_data.nickname,
+              job: this.state.survey_data.job,
+              datadog_user: this.state.survey_data.datadog_user
             }),
             headers: {
               'Content-type': 'application/json; charset=UTF-8',
