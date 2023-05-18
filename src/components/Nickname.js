@@ -19,31 +19,31 @@ class Nickname extends Component{
         let data = this.state.survey_data;
 
         
-        // var xhr = new XMLHttpRequest();
-        // xhr.open("POST", url, true);
-        // xhr.setRequestHeader("Content-Type", "application/json");
-        // xhr.onreadystatechange = function () {
-        //     if (xhr.readyState === 4 && xhr.status === 200) {
-        //         var json = JSON.parse(xhr.responseText);
-        //         console.log(json.email + ", " + json.password);
-        //     }
-        // };
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", url, true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.onreadystatechange = function () {
+            // if (xhr.readyState === 4 && xhr.status === 200) {
+            //     var json = JSON.parse(xhr.responseText);
+            //     console.log(json.email + ", " + json.password);
+            // }
+        };
         
-        //xhr.send(data);        
+        xhr.send(data);        
 
 
-        fetch(url,{
-            method:'POST',
-            headers: {
-                "Content-type": "application/json; charset=UTF-8",
-                dataType: 'json'
-            },
-            body:JSON.stringify(data)
-        }).then((result)=>{
-            result.json().then((res)=>{
-                //console.warn('res',res)
-            })
-        })      
+        // fetch(url,{
+        //     method:'POST',
+        //     headers: {
+        //         "Content-type": "application/json; charset=UTF-8",
+        //         dataType: 'json'
+        //     },
+        //     body:JSON.stringify(data)
+        // }).then((result)=>{
+        //     result.json().then((res)=>{
+        //         //console.warn('res',res)
+        //     })
+        // })      
 
         console.log(this.state.survey_data.nickname + " "+ this.state.survey_data.job + " " + this.state.survey_data.datadog_user);
         datadogRum.setUser({
