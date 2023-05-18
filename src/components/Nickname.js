@@ -131,12 +131,9 @@ class Nickname extends Component{
         var coupon_prize = "";
 
         if (rand_num === 1) {            
-          coupon_prize = "yes";
-          alert(this.state.survey_data.nickname + "님, 당첨되었습니다. 안라정님에게 DM으로 연락처를 알려주세요.")
-          
+          coupon_prize = "yes";       
         } else {
           coupon_prize = "no";
-          alert(this.state.survey_data.nickname + "님, 아쉽게 되었네요.")
         }
 
         datadogRum.setUser({
@@ -151,10 +148,6 @@ class Nickname extends Component{
       } else {
         alert(this.state.survey_data.nickname + "님, 아쉽게 되었네요.")
       }
-
-
-
-
         console.log("request sent! " + this.state.survey_data.nickname + " "+ this.state.survey_data.job + " " + this.state.survey_data.datadog_user);
     }
     
