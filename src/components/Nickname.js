@@ -27,12 +27,11 @@ class Nickname extends Component{
             body:JSON.stringify(data)
         }).then((result)=>{
             result.json().then((res)=>{
-                debugger
                 console.warn('res',res)
             })
         })      
 
-        console.log(nickname+" "+data.job + datadog_user);
+        console.log(this.state.survey_data.nickname + " "+ this.state.survey_data.job + " " + this.state.survey_data.datadog_user);
         datadogRum.setUser({
             job: this.state.survey_data.job,
             name: this.state.survey_data.nickname,
