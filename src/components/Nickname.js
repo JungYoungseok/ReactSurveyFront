@@ -4,26 +4,46 @@ import { datadogRum } from '@datadog/browser-rum';
 
 
 
-async function postData(url = "", data = {}) {
-    // Default options are marked with *
-    const response = await fetch(url, {
-      method: "POST", // *GET, POST, PUT, DELETE, etc.
-      mode: "cors", // no-cors, *cors, same-origin
-      cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-      credentials: "same-origin", // include, *same-origin, omit
-      headers: {
-        "Content-Type": "application/json",
-        // 'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      redirect: "follow", // manual, *follow, error
-      referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-      body: JSON.stringify(data), // body data type must match "Content-Type" header
-    });
 
-    var resText = response.json();
-    console.log(resText);
-    return resText; // parses JSON response into native JavaScript objects
+function postData(url, body) {
+  var http = new XMLHttpRequest;
+  http.open("POST", url, true);
+  http.setRequestHeader('Content-Type', 'application/json');
+  //http.withCredentials = 'true';
+  http.onreadystatechange = function() {
+      if(http.readyState == 4) {
+        console.log("here1");
+          console.log("response 4: " + http.responseText);
+      } else {
+          console.log("here2");
+          console.log("state " + http.readyState);
+      }
   }
+  http.send(body);
+}
+
+
+
+// async function postData(url = "", data = {}) {
+//     // Default options are marked with *
+//     const response = await fetch(url, {
+//       method: "POST", // *GET, POST, PUT, DELETE, etc.
+//       mode: "cors", // no-cors, *cors, same-origin
+//       cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+//       credentials: "same-origin", // include, *same-origin, omit
+//       headers: {
+//         "Content-Type": "application/json",
+//         // 'Content-Type': 'application/x-www-form-urlencoded',
+//       },
+//       redirect: "follow", // manual, *follow, error
+//       referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+//       body: JSON.stringify(data), // body data type must match "Content-Type" header
+//     });
+
+//     var resText = response.json();
+//     console.log(resText);
+//     return resText; // parses JSON response into native JavaScript objects
+//   }
 
 class Nickname extends Component{
 
@@ -42,23 +62,33 @@ class Nickname extends Component{
         let url = "https://0igxiahppc.execute-api.ap-northeast-2.amazonaws.com/v2/addSurvey";
         let data = this.state.survey_data;
         console.log("submit!!!")
+        var body = JSON.stringify({"nickname": this.state.survey_data.nickname,
+                 "job": this.state.survey_data.job,
+                 "datadog_user": this.state.survey_data.datadog_user });
+        postData('https://0igxiahppc.execute-api.ap-northeast-2.amazonaws.com/v2/addSurvey', body);
+
+        // window.DD_RUM && window.DD_RUM.setUser({
+        //     mbti: answer.toString(),
+        //     team: selectedTeam,
+        //   })
+                    
 
 
-        fetch('https://0igxiahppc.execute-api.ap-northeast-2.amazonaws.com/v2/addSurvey', {
-            method: 'POST',
-            body: JSON.stringify({
-              nickname: this.state.survey_data.nickname,
-              job: this.state.survey_data.job,
-              datadog_user: this.state.survey_data.datadog_user
-            }),
-            headers: {
-              'Content-type': 'application/json; charset=UTF-8',
-              'dataType': 'json'
-            }
-          })
-          .then(res => res.json())
-          .then(console.log)
-          .then(console.context())        
+        // fetch('https://0igxiahppc.execute-api.ap-northeast-2.amazonaws.com/v2/addSurvey', {
+        //     method: 'POST',
+        //     body: JSON.stringify({
+        //       nickname: this.state.survey_data.nickname,
+        //       job: this.state.survey_data.job,
+        //       datadog_user: this.state.survey_data.datadog_user
+        //     }),
+        //     headers: {
+        //       'Content-type': 'application/json; charset=UTF-8',
+        //       'dataType': 'json'
+        //     }
+        //   })
+        //   .then(res => res.json())
+        //   .then(console.log)
+        //   .then(console.context())
         // postData(url, data).then((res) => {
         //     console.log('This is res: ' + res); // JSON data parsed by `data.json()` call
         // });
@@ -96,7 +126,7 @@ class Nickname extends Component{
         //     })
         // })      
 
-        console.log(this.state.survey_data.nickname + " "+ this.state.survey_data.job + " " + this.state.survey_data.datadog_user);
+        console.log("request sent! " + this.state.survey_data.nickname + " "+ this.state.survey_data.job + " " + this.state.survey_data.datadog_user);
         datadogRum.setUser({
             job: this.state.survey_data.job,
             name: this.state.survey_data.nickname,
