@@ -16,34 +16,37 @@ class Nickname extends Component{
 
     submit(){
         let url = "https://0igxiahppc.execute-api.ap-northeast-2.amazonaws.com/v2/addSurvey";
-        let data = this.state.survey_data;
+        //let data = this.state.survey_data;
+        let data = '{"nickname" : "' + this.state.survey_data.nickname 
+                    + '", "job" : "' + this.state.survey_data.job 
+                    + '", "datadog_user" : "' + this.state.survey_data.datadog_user + '"}';
 
         
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", url, true);
-        xhr.setRequestHeader("Content-Type", "application/json");
-        xhr.onreadystatechange = function () {
-            // if (xhr.readyState === 4 && xhr.status === 200) {
-            //     var json = JSON.parse(xhr.responseText);
-            //     console.log(json.email + ", " + json.password);
-            // }
-        };
+        // var xhr = new XMLHttpRequest();
+        // xhr.open("POST", url, true);
+        // xhr.setRequestHeader("Content-Type", "application/json");
+        // xhr.onreadystatechange = function () {
+        //     // if (xhr.readyState === 4 && xhr.status === 200) {
+        //     //     var json = JSON.parse(xhr.responseText);
+        //     //     console.log(json.email + ", " + json.password);
+        //     // }
+        // };
         
-        xhr.send(JSON.stringify(data));        
+        // xhr.send(JSON.stringify(data));        
 
 
-        // fetch(url,{
-        //     method:'POST',
-        //     headers: {
-        //         "Content-type": "application/json; charset=UTF-8",
-        //         dataType: 'json'
-        //     },
-        //     body:JSON.stringify(data)
-        // }).then((result)=>{
-        //     result.json().then((res)=>{
-        //         //console.warn('res',res)
-        //     })
-        // })      
+        fetch(url,{
+            method:'POST',
+            headers: {
+                "Content-type": "application/json; charset=UTF-8",
+                dataType: 'json'
+            },
+            body:JSON.stringify(data)
+        }).then((result)=>{
+            result.json().then((res)=>{
+                //console.warn('res',res)
+            })
+        })      
 
         console.log(this.state.survey_data.nickname + " "+ this.state.survey_data.job + " " + this.state.survey_data.datadog_user);
         datadogRum.setUser({
@@ -70,7 +73,7 @@ class Nickname extends Component{
       console.log('Nickname render');
       this.state.survey_data.datadog_user=this.props.datadog_user;
       this.state.survey_data.job=this.props.job;
-      var _rand_name = names.random();
+      var _rand_name = ""; //names.random();
     
       return (
         <fieldset>
