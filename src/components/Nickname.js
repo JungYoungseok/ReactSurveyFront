@@ -17,9 +17,9 @@ class Nickname extends Component{
     submit(){
         let url = "https://0igxiahppc.execute-api.ap-northeast-2.amazonaws.com/v2/addSurvey";
         //let data = this.state.survey_data;
-        var data = '{"nickname" : "' + this.state.survey_data.nickname 
-                    + '", "job" : "' + this.state.survey_data.job 
-                    + '", "datadog_user" : "' + this.state.survey_data.datadog_user + '"}';
+        var data = '{\"nickname\" : "' + this.state.survey_data.nickname 
+                    + '\", "job" : \"' + this.state.survey_data.job 
+                    + '\", "datadog_user\" : "' + this.state.survey_data.datadog_user + '"}';
 
         
         // var xhr = new XMLHttpRequest();
