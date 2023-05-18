@@ -32,11 +32,12 @@ class Nickname extends Component{
             })
         })      
 
+        console.log(nickname+" "+data.job + datadog_user);
         datadogRum.setUser({
             job: data.job,
             name: data.nickname,
             datadog_user: data.datadog_user,
-            coupon_prize: "yes"
+            coupon_prize: "yes",            
         })
     }
     

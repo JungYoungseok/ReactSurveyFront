@@ -10,7 +10,7 @@ import Nickname from "./components/Nickname";
 import DDMaturity from "./components/DDMaturity";
 import { datadogRum } from '@datadog/browser-rum';
 import { Redirect } from "react-router-dom";
-
+import { datadogRum } from '@datadog/browser-rum';
 
 
 
