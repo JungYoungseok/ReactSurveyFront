@@ -167,7 +167,7 @@ class App extends Component {
 
         <Nickname job={_job} datadog_user={_datadog_user}> </Nickname>
         
-        <button type="submit">아무동작 안하는 버튼</button>
+        <button type="submit">궁금하면 클릭</button>
         <button type="submit" onClick={this.error}>에러 만드는 버튼</button>
    
 

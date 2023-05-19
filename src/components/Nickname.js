@@ -50,14 +50,11 @@ class Nickname extends Component{
         super();
         this.state = {
             survey_data:{nickname:"noname", job:"b", datadog_user:"0"},
-            lucky_draw_comment:"",
-            show: true,
+            lucky_draw_comment:""
         };
         this.submit = this.submit.bind(this);
         this.handleChange = this.handleChange.bind(this);
-      }
-
-    
+      }    
 
     submit(){
         let url = "https://0igxiahppc.execute-api.ap-northeast-2.amazonaws.com/v2/addSurvey";
@@ -127,13 +124,16 @@ class Nickname extends Component{
         //     })
         // })      
 
-        var rand_num = Math.floor(Math.random() * 2);
+        var rand_num = Math.floor(Math.random() * 100);
         var coupon_prize = "";
+        var comment = "";
 
-        if (rand_num === 1) {            
-          coupon_prize = "yes";       
+        if (rand_num === 95) {            
+          coupon_prize = "yes";
+          comment = this.state.survey_data.nickname + "님, 축하합니다. 당첨되신분 중 선착순 5분께 커피 쿠폰을 드릴 예정입니다. 최종 결과는 화면을 통해서 안내드리겠습니다.";
         } else {
           coupon_prize = "no";
+          comment = this.state.survey_data.nickname + "님, 아쉽게 되었네요."
         }
 
         datadogRum.setUser({
@@ -143,12 +143,12 @@ class Nickname extends Component{
           coupon_prize: coupon_prize,            
       })
 
-      if (coupon_prize === "yes") {            
-        alert(this.state.survey_data.nickname + "님, 축하합니다. 안라정님에게 DM으로 연락처를 알려주세요.")
-      } else {
-        alert(this.state.survey_data.nickname + "님, 아쉽게 되었네요.")
-      }
-        console.log("request sent! " + this.state.survey_data.nickname + " "+ this.state.survey_data.job + " " + this.state.survey_data.datadog_user);
+      this.setState({
+        lucky_draw_comment: comment
+      })
+
+      alert(comment);
+      console.log("request sent! " + this.state.survey_data.nickname + " "+ this.state.survey_data.job + " " + this.state.survey_data.datadog_user);
     }
     
     // handleChange(event){
@@ -185,6 +185,7 @@ class Nickname extends Component{
                 <button type="submit" >설문 제출</button>                        
             </form>            
         </fieldset>
+        
         
         {/* <button onClick={this.toggle}>
           toggle: {this.state.show ? 'show' : 'hide'}
